@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgs.cocktailparty.dao.UserDao">
+    <!--//登陆-->
+    <!--SecUser login(SecUser secUser);-->
+    <select id="login" parameterType="com.bgs.cocktailparty.pojo.TbUser" resultType="com.bgs.cocktailparty.pojo.TbUser">
+        SELECT tb_user.id,tb_user.usercode,tb_user.`password`,tb_user.username ,tb_user.`level`,tb_user.HBid
+        FROM tb_user LEFT JOIN tb_hebei ON tb_user.HBid = tb_hebei.id
+        where usercode=#{usercode} and password=#{password}
+    </select>
+
+
+    <select id="findareauser" resultType="com.bgs.cocktailparty.pojo.TbUser">
+       SELECT * FROM tb_user WHERE  HBid = #{id}
+    </select>
+
+    <insert id="adduser">
+        insert into  tb_user (tb_user.usercode,tb_user.`password`,tb_user.`level`,tb_user.username,tb_user.HBid) values (#{usercode},#{password},#{level},#{username},#{HBid})
+    </insert>
+</mapper>

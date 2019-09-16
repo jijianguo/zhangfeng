@@ -1,0 +1,39 @@
+#springMVC的视图解析器
+spring:
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /jsps/
+#    static1-path-pattern: /static1/**  #设置指定路径下静态资源放行
+#    热部署
+  devtools:
+    restart:
+      enabled: true
+      #与jdbc整合 mybatis
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/05?characterEncoding=utf8&useSSL=true
+    username: root
+    password: 123
+#修改tomcat端口号
+#server:
+#  port: 8088
+server:
+  jsp-servlet:
+    init-parameters:
+      development: true
+  #读取mapping映射文件
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  #驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+    #懒加载
+    lazy-loading-enabled: true
+  #type-aliases-package: com.bgs.testkaoshi20.pojo
+#logging:
+#  level: com.bgs.testkaoshi20.dao: debug
+logging:
+  level:
+    com.bgs.springbeichencarqianduan.dao: debug
+#打印sql语句

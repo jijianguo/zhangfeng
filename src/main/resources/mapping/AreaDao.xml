@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgs.cocktailparty.dao.AreaDao">
+    <!--左树查地区-->
+    <!--List<TbHebei> selarea(@Param("pid")Integer pid);-->
+
+    <select id="selarea"  resultType="com.bgs.cocktailparty.pojo.TbHebei">
+        select tb_hebei.*  ,1 as isParent from tb_hebei
+        <if test="parentId!=0 and parentId!=null">
+            where parentId = #{parentId}
+        </if>
+    </select>
+    <!--Integer addarea(TbHebei tbHebei);-->
+    <insert id="addarea">
+        insert into tb_hebei  values (#{id},#{name},#{parentId})
+    </insert>
+
+    <insert id="importcity">
+        insert into  tb_hebei (name,parentId) values
+        <foreach collection="list" item="a" separator=",">
+            (#{a.name},#{a.parentId})
+        </foreach>
+    </insert>
+
+</mapper>

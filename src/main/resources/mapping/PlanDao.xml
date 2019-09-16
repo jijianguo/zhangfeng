@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgs.cocktailparty.dao.PlanDao">
+    <insert id="addplan">
+        insert into tb_plan (userid,ifplan,starttime,endtime,planname,plantable,hbid,entrytime)
+        values (#{userid},0,#{starttime},#{endtime},#{planname},#{plantable},#{hbid},now())
+    </insert>
+
+    <select id="findplan"  resultType="com.bgs.cocktailparty.pojo.TbPlan">
+        SELECT id,planname,plantable,starttime,endtime,entrytime,truetable FROM tb_plan WHERE userid = #{id}
+    </select>
+
+    <update id="changeplan">
+        update tb_plan set truetable=#{truetable},newman=#{newman},oldman=#{oldman},
+        purposeman=#{purposeman},predictedpremium=#{predictedpremium},truetime=#{truetime},ifplan=1
+        where id = #{id}
+    </update>
+
+</mapper>
